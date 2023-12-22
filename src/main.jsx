@@ -65,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/updateTask/:_id',
         element: <TaskUpdate></TaskUpdate>,
-        // loader: ({ params }) => fetch(`http://localhost:5050/task/${params._id}`)
+        
       }
     ]
   }

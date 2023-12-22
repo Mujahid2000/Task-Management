@@ -4,7 +4,9 @@ import { MdModeEdit } from 'react-icons/md';
 import { AuthContext } from '../../Config/AuthProvider';
 import { Button, Modal } from 'flowbite-react';
 import { MdDelete } from "react-icons/md";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import { MdDoNotDisturb } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -13,46 +15,48 @@ const Task = () => {
   const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [updatedStatus, setUpdatedStatus] = useState('Ongoing'); // Initialize with 'Ongoing'
+  const apiURL = `https://todo-server-phi-three.vercel.app/task/${user?.email}`;
 
-  const apiURL = `http://localhost:5050/task/${user?.email}`;
 
-  
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(apiURL);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
-    useEffect(() => {
-      fetchData();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(apiURL);
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [fetchData]);
 
   const handleDelete = (task) => {
     console.log('Deleting task:', task);
-  
+
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5050/task/${task._id}`)
+          .delete(`https://todo-server-phi-three.vercel.app/task/${task._id}`)
           .then((res) => {
             console.log(res.data);
             fetchData();
 
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
             });
           })
           .catch((error) => {
@@ -61,7 +65,17 @@ const Task = () => {
       }
     });
   };
-  
+
+  const handleStatusUpdate = async (task) => {
+  const {_id, status} = task;
+
+    axios.patch(`https://todo-server-phi-three.vercel.app/changeStatus/${_id}`,{status: !status} )
+    .then(res => {
+      console.log(res.data);
+      toast.success("Success Update")
+    })
+    
+  };
 
 
   return (
@@ -78,6 +92,8 @@ const Task = () => {
               <th className="py-2 px-4 border-b">Description</th>
               <th className="py-2 px-4 border-b">Update</th>
               <th className="py-2 px-4 border-b">Delete</th>
+              <th className="py-2 px-4 border-b">Incomplete</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -107,6 +123,15 @@ const Task = () => {
                   </Link>
                 </td>
                 <td className="py-2 px-4 border-b"><button onClick={() => handleDelete(task)}><MdDelete className='w-7 h-8' /></button></td>
+                <td className="py-2 px-4 border-b">
+              {task.status !== true ? (
+                <button onClick={() => handleStatusUpdate(task)}>
+                  <MdDoNotDisturb />
+                </button>
+              ) : (
+                updatedStatus
+              )}
+            </td>
               </tr>
             ))}
           </tbody>
@@ -123,6 +148,8 @@ const Task = () => {
           )}
         </Modal>
       </div>
+
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

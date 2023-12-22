@@ -15,7 +15,7 @@ const TaskUpdate = () => {
   useEffect(() => { if (user?.email)
     {
       axios
-        .get(`http://localhost:5050/task/${_id}/${user?.email}`)
+        .get(`https://todo-server-phi-three.vercel.app/task/${_id}/${user?.email}`)
         .then((res) => res.data)
         .then((fetchedData) => {
           setData(fetchedData);
@@ -25,7 +25,7 @@ const TaskUpdate = () => {
   }, [user]);
 
 
-  
+
   const handleUpdate = async (e) => {
     e.preventDefault();
   
@@ -39,7 +39,7 @@ const TaskUpdate = () => {
     };
   
     try {
-      const response = await axios.patch(`http://localhost:5050/task/${_id}`, formData);
+      const response = await axios.patch(`https://todo-server-phi-three.vercel.app/task/${_id}`, formData);
       const data = response.data;
       console.log(data);
       if (data.modifiedCount > 0) {

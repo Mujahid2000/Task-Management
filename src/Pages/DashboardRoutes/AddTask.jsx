@@ -14,19 +14,19 @@ const AddTask = () => {
 
   const onSubmit = async (data) => {
     const formData = {
-      taskName: data.name,
-      time: data.time,
-      deadlines: data.deadline,
-      priority: data.category,
-      location: data.location,
-      description: data.description,
-      status: 'Ongoing',
-      username,
+    taskName: data.name,
+    time: data.time,
+    deadlines: data.deadline,
+    priority: data.category,
+    location: data.location,
+    description: data.description,
+    status: false,
+    username,
 
     };
 
     try {
-      const response = await axios.post('http://localhost:5050/task', formData);
+      const response = await axios.post('https://todo-server-phi-three.vercel.app/task', formData);
       console.log(response.data);
 
       Swal.fire({
