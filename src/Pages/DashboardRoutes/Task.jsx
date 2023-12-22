@@ -14,7 +14,21 @@ const Task = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
- 
+  const apiURL = `http://localhost:5050/task/${user?.email}`;
+
+  
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiURL);
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    useEffect(() => {
+      fetchData();
+  }, [fetchData]);
 
   const handleDelete = (task) => {
     console.log('Deleting task:', task);

@@ -20,7 +20,9 @@ const AddTask = () => {
       priority: data.category,
       location: data.location,
       description: data.description,
+      status: 'Ongoing',
       username,
+
     };
 
     try {

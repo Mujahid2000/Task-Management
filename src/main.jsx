@@ -65,10 +65,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/updateTask/:_id',
         element: <TaskUpdate></TaskUpdate>,
-        loader: ({ params }) => fetch(`https://marketplace-website-server.vercel.app/addJobs/${params._id}`, {
-          method: 'GET',
-           
-        })
+        // loader: ({ params }) => fetch(`http://localhost:5050/task/${params._id}`)
       }
     ]
   }
