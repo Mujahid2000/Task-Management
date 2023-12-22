@@ -62,7 +62,7 @@ const Dashboard = () => {
             alt="Logo"
         />
         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-         Your Dashboard
+         Dashboard
         </span>
         </Link>
         </button>
