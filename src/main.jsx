@@ -17,6 +17,7 @@ import Task from './Pages/DashboardRoutes/Task';
 import User from './Pages/DashboardRoutes/User';
 import AddTask from './Pages/DashboardRoutes/AddTask';
 import TaskUpdate from './Pages/DashboardRoutes/TaskUpdate';
+import PrivateRoute from './Config/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -48,23 +49,23 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path: 'task',
-        element: <Task></Task>
+        element: <PrivateRoute><Task></Task></PrivateRoute>
       },
       {
         path: 'user',
-        element: <User></User>
+        element: <PrivateRoute><User></User></PrivateRoute>
       },
       {
         path: 'addTask',
-        element: <AddTask></AddTask>
+        element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
       },
       {
         path: '/dashboard/updateTask/:_id',
-        element: <TaskUpdate></TaskUpdate>,
+        element: <PrivateRoute><TaskUpdate></TaskUpdate></PrivateRoute>
         
       }
     ]

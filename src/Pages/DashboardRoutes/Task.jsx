@@ -15,7 +15,7 @@ const Task = () => {
   const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [updatedStatus, setUpdatedStatus] = useState('Ongoing'); // Initialize with 'Ongoing'
+  const [updatedStatus, setUpdatedStatus] = useState('Completed'); 
   const apiURL = `https://todo-server-phi-three.vercel.app/task/${user?.email}`;
 
 
@@ -92,7 +92,7 @@ const Task = () => {
               <th className="py-2 px-4 border-b">Description</th>
               <th className="py-2 px-4 border-b">Update</th>
               <th className="py-2 px-4 border-b">Delete</th>
-              <th className="py-2 px-4 border-b">Incomplete</th>
+              <th className="py-2 px-4 border-b">Status</th>
               
             </tr>
           </thead>

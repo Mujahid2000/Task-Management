@@ -6,7 +6,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
 
 import { MdLocalSee } from "react-icons/md";
-
+import { FaUserAlt } from "react-icons/fa";
 import { Button, Modal } from 'flowbite-react';
 import { useContext, useState } from 'react';
 import AddTask from '../DashboardRoutes/AddTask';
@@ -40,6 +40,16 @@ const Dashboard = () => {
             >
                 <MdLocalSee  className="w-7 h-7" />
                 <span className="flex-1 ms-3 whitespace-nowrap">Show Task</span>
+            </Link>
+            </li>
+
+            <li>
+            <Link
+                to="/dashboard/user"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+                <FaUserAlt  className="w-7 h-7" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
             </Link>
             </li>
             
@@ -84,6 +94,15 @@ const Dashboard = () => {
             >
                 <MdLocalSee  className="w-7 h-7" />
                 <span className="flex-1 ms-3 whitespace-nowrap">Show Task</span>
+            </Link>
+            </li>
+            <li>
+            <Link
+                to="/dashboard/user"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+                <FaUserAlt  className="w-7 h-7" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
             </Link>
             </li>
             
